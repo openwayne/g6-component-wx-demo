@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "G6": "g6-component-wx/g6-component/g6-component"
+  }
+}
