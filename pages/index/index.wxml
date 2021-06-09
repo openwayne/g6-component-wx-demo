@@ -2,5 +2,5 @@
   <view>width: {{canvasWidth}}</view>
   <view>height: {{canvasHeight}}</view>
   <view>pixelRatio: {{pixelRatio}}</view>
-  <G6 width="{{canvasWidth}}" height="{{canvasHeight}}" pixelRatio="{{pixelRatio}}" onInit="{{onCanvasInit}}" onTouchEvent="{{onTouch}}" ></G6>
+  <F6 width="{{canvasWidth}}" height="{{canvasHeight}}" pixelRatio="{{pixelRatio}}" onInit="{{onCanvasInit}}" onTouchEvent="{{onTouch}}" ></F6>
 </view>

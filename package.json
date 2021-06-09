@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@antv/g6-mobile": "^0.0.1-beta.14",
-    "g6-component-wx": "^0.0.1"
+    "@antv/f6": "^0.0.5",
+    "@antv/f6-wx": "^0.0.2"
   }
 }

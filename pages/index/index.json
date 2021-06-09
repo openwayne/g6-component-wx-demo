@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "G6": "g6-component-wx/g6-component/g6-component"
+    "F6": "@antv/f6-wx/container/container"
   }
 }

@@ -1,7 +1,7 @@
-const G6 = require('@antv/g6-mobile/g6');
-const force = require('@antv/g6-mobile/extends/layout/forceLayout');
+const F6 = require('@antv/f6/f6');
+const force = require('@antv/f6/extends/layout/forceLayout');
 
-G6.registerLayout('force', force);
+F6.registerLayout('force', force);
 
 const data = {
   nodes: [
@@ -55,8 +55,8 @@ Page({
     canvasHeight: 100,
     pixelRatio: 1,
     onCanvasInit(ctx, rect, canvas, renderer) {
-      console.log(ctx, rect, canvas, renderer, this, G6);
-      this.graph = new G6.Graph({
+      console.log(ctx, rect, canvas, renderer, this);
+      this.graph = new F6.Graph({
         context: ctx,
         renderer,
         width: rect.width,
