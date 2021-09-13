@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@antv/f6": "^0.0.5",
-    "@antv/f6-wx": "^0.0.2"
+    "@antv/f6-wx": "^0.0.4"
   }
 }
