@@ -1,5 +1,5 @@
-const F6 = require('@antv/f6/f6');
-const force = require('@antv/f6/extends/layout/forceLayout');
+const F6 = require('@antv/f6-wx');
+const force = require('@antv/f6-wx/extends/layout/forceLayout');
 
 F6.registerLayout('force', force);
 
@@ -54,67 +54,67 @@ Page({
     canvasWidth: 100,
     canvasHeight: 100,
     pixelRatio: 1,
-    onCanvasInit(ctx, rect, canvas, renderer) {
-      console.log(ctx, rect, canvas, renderer, this);
-      this.graph = new F6.Graph({
-        context: ctx,
-        renderer,
-        width: rect.width,
-        height: rect.height,
-        defaultNode: {
-          color: '#5B8FF9',
+   
+  },
+  onCanvasInit(event) {
+    const {ctx, rect, canvas, renderer} = event.detail
+    this.graph = new F6.Graph({
+      context: ctx,
+      renderer,
+      width: rect.width,
+      height: rect.height,
+      defaultNode: {
+        color: '#5B8FF9',
+      },
+      modes: {
+        default: ['drag-canvas', 'drag-node', 'zoom-canvas'],
+      },
+      layout: {
+        type: 'force',
+        preventOverlap: true,
+        linkDistance: (d) => {
+          if (d.source.id === 'node0') {
+            return 100;
+          }
+          return 30;
         },
-        modes: {
-          default: ['drag-canvas', 'drag-node', 'zoom-canvas'],
+        nodeStrength: (d) => {
+          if (d.isLeaf) {
+            return -50;
+          }
+          return -10;
         },
-        layout: {
-          type: 'force',
-          preventOverlap: true,
-          linkDistance: (d) => {
-            if (d.source.id === 'node0') {
-              return 100;
-            }
-            return 30;
-          },
-          nodeStrength: (d) => {
-            if (d.isLeaf) {
-              return -50;
-            }
-            return -10;
-          },
-          edgeStrength: (d) => {
-            if (
-              d.source.id === 'node1' ||
-              d.source.id === 'node2' ||
-              d.source.id === 'node3'
-            ) {
-              return 0.7;
-            }
-            return 0.1;
-          },
+        edgeStrength: (d) => {
+          if (
+            d.source.id === 'node1' ||
+            d.source.id === 'node2' ||
+            d.source.id === 'node3'
+          ) {
+            return 0.7;
+          }
+          return 0.1;
         },
-      });
-      this.graph.data(data);
-      this.graph.render();
+      },
+    });
+    this.graph.data(data);
+    this.graph.render();
 
-      this.graph.on('node:dragstart', (e) => {
-        this.graph.layout();
-        refreshDragedNodePosition(e);
-      });
+    this.graph.on('node:dragstart', (e) => {
+      this.graph.layout();
+      refreshDragedNodePosition(e);
+    });
 
-      this.graph.on('node:drag', (e) => {
-        refreshDragedNodePosition(e);
-      });
+    this.graph.on('node:drag', (e) => {
+      refreshDragedNodePosition(e);
+    });
 
-      this.graph.on('node:dragend', (e) => {
-        e.item.get('model').fx = null;
-        e.item.get('model').fy = null;
-      });
-    },
-    onTouch(e) {
-      console.log('canvas ontouch', e);
-      this.graph.emitEvent(e);
-    },
+    this.graph.on('node:dragend', (e) => {
+      e.item.get('model').fx = null;
+      e.item.get('model').fy = null;
+    });
+  },
+  onTouch(e) {
+    this.graph.emitEvent(e.detail);
   },
   onLoad() {
     const { windowWidth, windowHeight, pixelRatio } = wx.getSystemInfoSync();
